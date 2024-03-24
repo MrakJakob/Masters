@@ -1,0 +1,164 @@
+\documentclass[9pt]{IEEEtran}
+
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{array}
+\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{gensymb}
+\usepackage{longtable}
+\usepackage{supertabular}
+\usepackage{multicol}
+\usepackage{multirow} 
+\usepackage[utf8x]{inputenc}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\graphicspath{{./figures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor trig-gs}
+
+% ============================================================================================
+
+\title{\vspace{0ex}
+Exercise 1: Optical flow}
+
+\author{Jakob Mrak\vspace{-4.0ex}}
+
+% ============================================================================================
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Optical flow estimation is a fundamental problem in computer vision, aiming to compute the motion of objects between consecutive frames in a video sequence. It is a key component in many applications such as object tracking, video stabilization, and action recognition. In this exercise, we will implement and compare two optical flow estimation methods: Lucas-Kanade and Horn-Schunck. We will evaluate the performance of these methods on the provided dataset and discuss their limitations and failure cases.
+
+\section{Experiments}
+
+We tested both methods on the provided dataset and the results are shown in Figures 1-4.
+The optical flow estimation results on the rotated random noise images are shown in Figure \ref{fig:random_noise}, where we can observe larger motion near the edges of the image, which is expected since we rotated the image around its center and pixels that are further away move proporionally more.
+The results on the provided images from the collision folder are shown in Figure \ref{fig:collision} where we can see mayor optical flow in the center of the image where the toy car is located since is the closest to the camera and it is approaching it. We can also see some noise in results of both methods, but more drastic are in case of Lucas-Kanade. 
+Figure \ref{fig:disparity} shows the results on the provided images from the disparity folder. The results of Lucas-Kanade show movement mostly around the edges in the image, while the results of Horn-Schunck show movement around the whole objects.
+The results on the provided images from the lab2 folder are shown in Figure \ref{fig:lab2}. The results are similar to those in figure \ref{fig:disparity}.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.45\columnwidth]{images/1.png}
+    \includegraphics[width=0.45\columnwidth]{images/2.png}
+    \caption{Optical flow estimation results on the rotated random noise images}
+    \label{fig:random_noise}
+\end{figure}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.45\columnwidth]{images/3.png}
+    \includegraphics[width=0.45\columnwidth]{images/4.png}
+    \caption{Optical flow estimation results on provided images from collision folder}
+    \label{fig:collision}
+\end{figure}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.45\columnwidth]{images/5.png}
+    \includegraphics[width=0.45\columnwidth]{images/6.png}
+    \caption{Optical flow estimation results on provided images from disparity folder}
+    \label{fig:disparity}
+\end{figure}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.45\columnwidth]{images/7.png}
+    \includegraphics[width=0.45\columnwidth]{images/8.png}
+    \caption{Optical flow estimation results on provided images from lab2 folder}
+    \label{fig:lab2}
+\end{figure}
+
+Overall Horn-Schunck seems to perform better than Lucas-Kanade, especially in the regions with low texture or edges. The estimated motion of Horn-Schunck is more smooth and continuous, while the motion of Lucas-Kanade is more noisy and discontinuous.
+Most significant problem with Lucas-Kanade is that not all the estimated motion is computed with equal reliability.
+
+We can determine where the Lucas-Kanade optical flow can not be estimated reliably by computing the eigenvalues of the the covariance matrix of the local image gradients. If the eigenvalues are too small, the optical flow can not be estimated reliably.
+In our case we used Harris response function instead of the eigenvalues of the covariance matrix of the local image gradients, but the principle is similar. The Harris responese provides a scalar measure of corner strenght in the image. Regions with strong corners are more likely to produce reliable optical flow estimates, as they offer distinct features for tracking.
+We use Harris response, beacuse of simplicity and efficiency compared to calculating the actual eigenvalues. By filtering out points with low Harris response, we focus the optical flow estimation on areas where motion can be reliably estimated. The results are shown in Figure \ref{fig:harris_response}.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\columnwidth, height=4cm, keepaspectratio]{images/harris.png}
+    \caption{Harris response of the first image from the collision folder. The black areas are the areas with low Harris response which we filtered out.}
+    \label{fig:harris_response}
+\end{figure}
+
+
+In case of Lucas-Kanade the most important parameter is the size of the kernel used for the estimation, but we also set sigma value which we use to calculate the spatial derivatives Ix and Iy and sigma for Gauss smoothing the temporal derivative It.
+The kernel size determines the size of the local region used for the estimation. If the window is too small, the optical flow can not be estimated reliably, while if the window is too large, the optical flow can not capture the local motion. 
+The optimal size depends on the size of the objects in the image and the amount of noise. The results for different kernel sizes are shown in Figure \ref{fig:kernel_size}. We can observe that the kernel size of 3x3 almost completely fails to estimate the motion, which is probably due to the versatile nature of the scene in the compared images. There is a lot of different edges and corners in the images, so the 3x3 kernel is not able to capture the motion of the objects. 
+The more we increase the kernel size, the more accurate the estimation becomes and we found that the kernel size of 14x14 gives the best results in our case.
+
+For Horn-Schunck we set the number of iterations, sigma for the same reasons as with LK and the smoothness parameter \(\lambda\). The number of iterations determines the number of times the algorithm is applied to the image.
+\(\lambda\) determines the smoothness of the estimated optical flow, but we haven't noticed a major effect on the results so we kept it constant (\(\lambda = 0.5\)). 
+In principle the more iterations we perform, the better the results, but at the same time, the more computationally expensive the estimation becomes and at some point the algorithm converges anyways.
+The optimal number of iterations varies depending on the image. For the images used from the lab2 folder, the optimal number of iterations is around 1000, which is shown in Figure \ref{fig:horn_schunck_iter}.
+
+
+ \begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\columnwidth, height=8cm, keepaspectratio]{images/lucas_kanade_params.png}
+    \caption{Lucas-Kanade optical flow estimation results for different kernel sizes.}
+    \label{fig:kernel_size}
+\end{figure}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\columnwidth, height=8cm, keepaspectratio]{images/horn_schunck_iter.png}
+    \caption{Hans-Schunck optical flow estimation results for different number of iterations.}
+    \label{fig:horn_schunck_iter}
+\end{figure}
+
+Since the main drawback of the Hans-Schunck method is the computational complexity, we can use the Lucas-Kanade method to estimate the initial optical flow and then use the Horn-Schunck method to refine the results. 
+With this improvement we speed up the computation of Horn-Schunck as seen in table \ref{tab:performance}. We can see that the time of the improved HS is even larger in the first two cases, but in the last two cases the time more noticably decreases.
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Performance Comparison of Algorithms}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{*}{Images} & \multicolumn{3}{c|}{Algorithm time [ms]} \\
+        \cline{2-4}
+         & LK & HS & HS improved \\
+        \hline
+        Random & 15 & 131 & 140 \\
+        Collision & 16 & 862 & 909 \\
+        Disparity & 43 & 3501  & 3403 \\
+        Lab2 & 32 & 3692 & 3295 \\
+        \hline
+    \end{tabular}
+    \label{tab:performance}
+\end{table}
+
+\section{Conclusion}
+
+A sentence or two to conclude the report. Write when the method works well and what its limitations.
+We have implemented and compared two optical flow estimation methods: Lucas-Kanade and Horn-Schunck. We have tested both methods on the provided dataset and discussed their limitations and failure cases.
+We have found that Horn-Schunck performs better than Lucas-Kanade, especially when there is less texture in the image or near the edges.
+The main drawback of the Hans-Schunck method is the computational complexity, but we can use the LK output for HS input to slightly speed up the computation. 
+
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\end{document}
