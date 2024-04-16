@@ -1,0 +1,15 @@
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracerFramework.csproj.AssemblyReference.cache
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracer.MainWindow.resources
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracer.Properties.Resources.resources
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracerFramework.csproj.GenerateResource.cache
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracerFramework.csproj.CoreCompileInputs.cache
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\PathTracer.exe.config
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\PathTracer.exe
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\PathTracer.pdb
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\MathNet.Numerics.dll
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\MathNet.Spatial.dll
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\MathNet.Numerics.xml
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\bin\Debug\MathNet.Spatial.xml
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTrac.7CC0EBA3.Up2Date
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracer.exe
+C:\Users\mrakj\Faks\Magisterij\2 semester\NRG\Homework2\PathTracerFramework\obj\Debug\PathTracer.pdb
