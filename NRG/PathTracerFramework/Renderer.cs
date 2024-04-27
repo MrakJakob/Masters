@@ -24,7 +24,7 @@ namespace PathTracer
         private Bitmap finalRgbImage;
         private double[,] pixelWeights;
         private long totalSamples = 0;
-        private const long maxTotalSamples = 10000000;
+        private const long maxTotalSamples = 10000000000;
 
         private Bitmap bmp;
 

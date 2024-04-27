@@ -1,16 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Homework2\\PathTracerFramework\\",
+  "WorkspaceRootPath": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|c:\\users\\mrakj\\faks\\magisterij\\2 semester\\nrg\\homework2\\pathtracerframework\\pathtracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|solutionrelative:pathtracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|c:\\users\\mrakj\\faks\\magisterij\\2 semester\\nrg\\masters\\nrg\\pathtracerframework\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|solutionrelative:mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|PathTracerFramework||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|c:\\users\\mrakj\\faks\\magisterij\\2 semester\\nrg\\masters\\nrg\\pathtracerframework\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|solutionrelative:mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|c:\\users\\mrakj\\faks\\magisterij\\2 semester\\nrg\\homework2\\pathtracerframework\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|6185191f-1008-4fb2-a715-3a4e4f27e610"
+      "AbsoluteMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B790C68F-81CF-40AA-A506-1955BAE53DD2}|PathTracerFramework.csproj|solutionrelative:MainWindow.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -33,26 +35,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PathTracerFramework",
-              "DocumentMoniker": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Homework2\\PathTracerFramework\\PathTracerFramework.csproj",
-              "RelativeDocumentMoniker": "PathTracerFramework.csproj",
-              "ToolTip": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Homework2\\PathTracerFramework\\PathTracerFramework.csproj",
-              "RelativeToolTip": "PathTracerFramework.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-04-16T16:10:14.204Z",
+              "Title": "MainWindow.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.cs",
+              "RelativeDocumentMoniker": "MainWindow.cs",
+              "ToolTip": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.cs [Design]",
+              "RelativeToolTip": "MainWindow.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T17:56:11.863Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.Designer.cs",
+              "RelativeDocumentMoniker": "MainWindow.Designer.cs",
+              "ToolTip": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.Designer.cs",
+              "RelativeToolTip": "MainWindow.Designer.cs",
+              "ViewState": "AQIAAJgAAAAAAAAAAAAgwLkAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T17:52:19.003Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PathTracer.cs",
-              "DocumentMoniker": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Homework2\\PathTracerFramework\\PathTracer.cs",
-              "RelativeDocumentMoniker": "PathTracer.cs",
-              "ToolTip": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Homework2\\PathTracerFramework\\PathTracer.cs",
-              "RelativeToolTip": "PathTracer.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAAABwAAAAQAAAA",
+              "Title": "MainWindow.cs",
+              "DocumentMoniker": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.cs",
+              "RelativeDocumentMoniker": "MainWindow.cs",
+              "ToolTip": "C:\\Users\\mrakj\\Faks\\Magisterij\\2 semester\\NRG\\Masters\\NRG\\PathTracerFramework\\MainWindow.cs",
+              "RelativeToolTip": "MainWindow.cs",
+              "ViewState": "AQIAAG0AAAAAAAAAAAAQwJcAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-16T13:01:38.021Z",
+              "WhenOpened": "2024-04-18T10:05:18.001Z",
               "EditorCaption": ""
             }
           ]

@@ -13,6 +13,7 @@ namespace PathTracer
     public class Scene
     {
 
+
         /// <summary>
         /// Elements contains all scene elements (lights and shapes)
         /// </summary>
@@ -25,6 +26,8 @@ namespace PathTracer
         public double ImagePlaneHeight => ImagePlaneWidth / AspectRatio;
         public double ImagePlaneDistance { get; set; } = 8;
         public double ImagePlaneVerticalOffset { get; set; } = 0;
+
+        private MainWindow mainWindowInstance;
 
         /// <summary>
         /// Finds the closest intersection of ray with scene
@@ -69,7 +72,7 @@ namespace PathTracer
         /// Generate Cornell Box Geometry
         /// </summary>
         /// <returns>Generated scene</returns>
-        public static Scene CornellBox()
+        public static Scene CornellBox(float lightIntensity, float lightRadius, float emissionSpectrum)
         {
             var s = new Scene()
             {
@@ -105,24 +108,32 @@ namespace PathTracer
             el.BSDF.Add(new Lambertian(Spectrum.ZeroSpectrum.FromRGB(Color.Red)));
             s.Elements.Add(el);
 
-            s.Elements.Add(new DiffuseAreaLight(new Disk(80, 0.1, Transform.Translate(278, 548, 280).A(Transform.RotateX(90))), Spectrum.Create(1), 20));
+            s.Elements.Add(new DiffuseAreaLight(new Disk(lightRadius, 0.1, Transform.Translate(278, 548, 280).A(Transform.RotateX(90))), Spectrum.Create(emissionSpectrum), lightIntensity));
+            
 
+            // add spherical light source
+            //s.Elements.Add(new DiffuseAreaLight(new Sphere(50, Transform.Translate(278, 548, 280)), Spectrum.Create(1), 20));
+            DiffuseAreaLight dl = new DiffuseAreaLight(new Sphere(lightRadius, Transform.Translate(278, 548, 280).A(Transform.RotateX(45))), Spectrum.Create(emissionSpectrum), lightIntensity);
 
+            // add sphere light source to scene
+            // s.Elements.Add(dl);
 
             el = new Sphere(100, Transform.Translate(150, 100, 420));
-            el.BSDF.Add(new Lambertian(Spectrum.ZeroSpectrum.FromRGB(Color.Blue)));
+            // el.BSDF.Add(new Lambertian(Spectrum.ZeroSpectrum.FromRGB(Color.Blue)));
+            // el.BSDF.Add(new Lambertian(Spectrum.ZeroSpectrum.FromRGB(Color.White)));
+            el.BSDF.Add(new OrenNayar(Spectrum.ZeroSpectrum.FromRGB(Color.White), 1.5, 1, 0.05));
             s.Elements.Add(el);
 
             el = new Sphere(100, Transform.Translate(400, 100, 230));
-            //el.BSDF.Add(new MicrofacetReflection(Spectrum.ZeroSpectrum.FromRGB(Color.White), 1.5, 1, 0.05));
-            //el.BSDF.Add(new SpecularReflection(Spectrum.ZeroSpectrum.FromRGB(Color.White),0,0));
-            //el.BSDF.Add(new SpecularReflection(Spectrum.ZeroSpectrum.FromRGB(Color.White),1,1.5));
+            // el.BSDF.Add(new OrenNayar(Spectrum.ZeroSpectrum.FromRGB(Color.White), 1.5, 1, 0.05));
+            // el.BSDF.Add(new Lambertian(Spectrum.ZeroSpectrum.FromRGB(Color.White)));
+            // el.BSDF.Add(new SpecularReflection(Spectrum.ZeroSpectrum.FromRGB(Color.White),0,0));
+            // el.BSDF.Add(new SpecularReflection(Spectrum.ZeroSpectrum.FromRGB(Color.White),1,1.5));
             //el.BSDF.Add(new SpecularTransmission(Spectrum.ZeroSpectrum.FromRGB(Color.White), 1, 1.5));
             el.BSDF.Add(new Lambertian(Spectrum.ZeroSpectrum.FromRGB(Color.Yellow)));
             s.Elements.Add(el);
 
             return s;
-
         }
     }
 }

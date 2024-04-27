@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows.Forms.VisualStyles;
+using MathNet.Numerics;
 using MathNet.Numerics.Integration;
 
 namespace PathTracer
@@ -24,24 +27,41 @@ namespace PathTracer
         {
             Ray r = WorldToObject.Apply(ray);
 
-            // TODO: Compute quadratic sphere coefficients
-            
-
             // TODO: Initialize _double_ ray coordinate values
+            double ox = r.o.x, oy = r.o.y, oz = r.o.z;
+            double dx = r.d.x, dy = r.d.y, dz = r.d.z;
+            // TODO: Compute quadratic sphere coefficients
+            double a = dx * dx + dy * dy + dz * dz;
+            double b = 2 * (dx * ox + dy * oy + dz * oz);
+            double c = ox * ox + oy * oy + oz * oz - Radius * Radius;
 
             // TODO: Solve quadratic equation for _t_ values
+            (bool real_solutions, double t0, double t1) = Utils.Quadratic(a, b, c);
+            if (!real_solutions) return (null, null);
 
-            // TODO: Check quadric shape _t0_ and _t1_ for nearest intersection
+            // Check quadric shape _t0_ and _t1_ for nearest intersection
+            if (t1 <= 0) return (null, null);
+            double tShapeHit = t0;
+            if (tShapeHit <= 0)
+            {
+                tShapeHit = t1;
+                if (tShapeHit <= 0) return (null, null);
+            }
+            
+            // Compute sphere hit position and $\phi$
+            Vector3 pHit = r.Point(tShapeHit);
+            
+            // scale pHit
+            pHit *= Radius / pHit.Length();
 
-            // TODO: Compute sphere hit position and $\phi$
+            Vector3 dpdu = new Vector3(-2 * Math.PI * pHit.y, 2 * Math.PI * pHit.x, 0);
 
-            // TODO: Return shape hit and surface interaction
+            // return shape hit and surface interaction
+            Vector3 wo = -r.d;
 
-            // A dummy return example
-            double dummyHit = 0.0;
-            Vector3 dummyVector = new Vector3(0, 0, 0);
-            SurfaceInteraction dummySurfaceInteraction = new SurfaceInteraction(dummyVector, dummyVector, dummyVector, dummyVector, this);
-            return (dummyHit, dummySurfaceInteraction);
+
+            SurfaceInteraction si = new SurfaceInteraction(pHit, pHit, wo, dpdu, this);
+            return (tShapeHit, ObjectToWorld.Apply(si));
         }
 
         /// <summary>
@@ -50,15 +70,22 @@ namespace PathTracer
         /// <returns>point in world, pdf of point</returns>
         public override (SurfaceInteraction, double) Sample()
         {
-            // TODO: Implement Sphere sampling
+            // Implement Sphere sampling
+            Vector3 pObj = new Vector3(0, 0, 0) + Radius * Samplers.UniformSampleSphere();
 
-            // TODO: Return surface interaction and pdf
+            Vector3 normal = pObj.Clone().Normalize();
 
-            // A dummy return example
-            double dummyPdf = 1.0;
-            Vector3 dummyVector = new Vector3(0, 0, 0);
-            SurfaceInteraction dummySurfaceInteraction = new SurfaceInteraction(dummyVector, dummyVector, dummyVector, dummyVector, this);
-            return (dummySurfaceInteraction, dummyPdf);
+            // reproject pObj to sphere surface
+            pObj = pObj * (Radius / pObj.Length());
+
+            Vector3 wo = Vector3.ZeroVector;
+            Vector3 dpdu = new Vector3(-pObj.y, pObj.x, 0);
+
+
+            double pdf = 1 / Area();
+            SurfaceInteraction si = new SurfaceInteraction(pObj, normal, wo, dpdu, this);
+            // Return surface interaction and pdf
+            return (ObjectToWorld.Apply(si), pdf);
         }
 
         public override double Area() { return 4 * Math.PI * Radius * Radius; }
@@ -71,7 +98,7 @@ namespace PathTracer
         /// <returns>pdf of wi given this shape</returns>
         public override double Pdf(SurfaceInteraction si, Vector3 wi)
         {
-            throw new NotImplementedException();
+            return 1 / Area();
         }
 
     }
